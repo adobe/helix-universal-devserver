@@ -1,0 +1,11 @@
+{
+  "name": "simple-project",
+  "version": "1.45.0",
+  "description": "Simple Test Project",
+  "private": true,
+  "wsk": {
+    "namespace": "helix",
+    "name": "simple-package/simple-name@${version}",
+    "params-file": "missing.env"
+  }
+}

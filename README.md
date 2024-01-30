@@ -1,6 +1,6 @@
 # Helic Universal Development Server
 
-> Development server to test universal functions.
+> Development server for local development of helix universal functions
 
 ## Status
 [![codecov](https://img.shields.io/codecov/c/github/adobe/helix-universal-devserver.svg)](https://codecov.io/gh/adobe/helix-universal-devserver)
@@ -17,7 +17,34 @@ $ npm install @adobe/helix-universal-devserver
 
 ## Usage
 
-See the [API documentation](docs/API.md).
+```
+// test/dev.js
+
+import { DevelopmentServer } from '@adobe/helix-universal-devserver';
+import { main } from '../src/index.js';
+
+async function run() {
+ const devServer = await new DevelopmentServer(main).init();
+ await devServer.start();
+}
+
+run().then(process.stdout).catch(process.stderr);
+```
+
+### Using development params with the server
+
+Sometimes it might be useful to specify action params that would be provided during deployment
+but are not available during development. those can be specified by a `dev-params-file` `wsk`
+property. those parameters are loaded an applied to every function call. eg:
+
+```json
+...
+  "wsk": {
+    ...
+    "dev-params-file": ".dev-secrets.env"
+  }
+...
+```
 
 ## Development
 
