@@ -105,13 +105,7 @@ export class DevelopmentServer {
    * @returns this
    */
   async init() {
-    // load the action params
-    let pkgJson = {};
-    try {
-      pkgJson = await fse.readJson(path.resolve(this._cwd, 'package.json'));
-    } catch (e) {
-      // ignore
-    }
+    const pkgJson = await fse.readJson(path.resolve(this._cwd, 'package.json'));
     const config = new BaseConfig();
     if (pkgJson.wsk) {
       const withParamsFile = async (file) => {

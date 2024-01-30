@@ -119,17 +119,6 @@ describe('Server Test', () => {
     assert.strictEqual(await res.text(), `hello: http://localhost:${server.port}`);
   });
 
-  it('ignores corrupt package json', async () => {
-    const main = () => new Response('hello, world.');
-    server = await new DevelopmentServer(main)
-      .withPort(0)
-      .withDirectory(resolve(__rootdir, 'test', 'fixtures', 'corrupt-pkg-json'))
-      .init();
-    await server.start();
-    const res = await fetch(`http://localhost:${server.port}/`);
-    assert.strictEqual(await res.text(), 'hello, world.');
-  });
-
   it('ignores missing dev files', async () => {
     const main = () => new Response('hello, world.');
     server = await new DevelopmentServer(main)

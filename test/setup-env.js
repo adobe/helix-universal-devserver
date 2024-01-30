@@ -13,6 +13,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// eslint-disable-next-line
 console.log('Forcing HTTP/1.1 for @adobe/fetch');
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 
