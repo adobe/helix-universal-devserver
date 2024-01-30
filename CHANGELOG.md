@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/adobe/helix-universal-devserver/compare/v1.0.0...v1.0.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* cleanup release ([89ec741](https://github.com/adobe/helix-universal-devserver/commit/89ec7411bac5c8652c20f5f902c3cdc09e1eaa72))
+
 # 1.0.0 (2024-01-30)
 
 
