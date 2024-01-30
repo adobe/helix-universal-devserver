@@ -47,7 +47,7 @@
     "*.cjs": "eslint"
   },
   "dependencies": {
-    "@adobe/helix-deploy": "^10.4.0",
+    "@adobe/helix-deploy": "^11.0.0",
     "@adobe/helix-universal": "4.4.1",
     "express": "4.18.2",
     "fs-extra": "11.2.0"
