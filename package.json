@@ -7,7 +7,6 @@
   "scripts": {
     "test": "c8 mocha",
     "lint": "eslint .",
-    "docs": "npx jsdoc2md -c .jsdoc.json --files 'src/*.js' > docs/API.md",
     "semantic-release": "semantic-release",
     "semantic-release-dry": "semantic-release --dry-run --branches $CI_BRANCH",
     "prepare": "husky install"
@@ -30,13 +29,13 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "2.0.5",
+    "@adobe/fetch": "4.1.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/npm": "11.0.2",
     "c8": "9.1.0",
     "eslint": "8.56.0",
     "husky": "8.0.3",
-    "jsdoc-to-markdown": "8.0.0",
     "junit-report-builder": "3.1.0",
     "lint-staged": "15.2.0",
     "mocha": "10.2.0",
@@ -46,5 +45,11 @@
   "lint-staged": {
     "*.js": "eslint",
     "*.cjs": "eslint"
+  },
+  "dependencies": {
+    "@adobe/helix-deploy": "^10.4.0",
+    "@adobe/helix-universal": "4.4.1",
+    "express": "4.18.2",
+    "fs-extra": "11.2.0"
   }
 }
