@@ -259,4 +259,58 @@ describe('Server Test', () => {
     const res = await fetch(`http://localhost:${server.port}/`);
     assert.strictEqual(await res.text(), 'xfh: https://localhost/helix-services/content-proxy/v2');
   });
+
+  it('uses a given adapter', async () => {
+    const adapter = async (event) => {
+      // eslint-disable-next-line no-param-reassign
+      delete event.headers.host;
+      assert.deepStrictEqual(event, {
+        body: undefined,
+        headers: {
+        // "host": "localhost:51246",
+          'user-agent': 'adobe-fetch/4.1.1',
+          accept: '*/*',
+          'accept-encoding': 'gzip,deflate,br',
+          connection: 'close',
+        },
+        pathParameters: {
+          path: '',
+        },
+        requestContext: {
+          domainName: 'localhost',
+          http: {
+            method: 'GET',
+          },
+        },
+        rawPath: '/',
+        rawQueryString: '',
+      });
+      return {
+        statusCode: 200,
+        headers: {},
+        body: 'hello, world',
+      };
+    };
+    server = await new DevelopmentServer()
+      .withPort(0)
+      .withAdapter(adapter)
+      .init();
+    await server.start();
+    const res = await fetch(`http://localhost:${server.port}/`);
+    assert.strictEqual(await res.text(), 'hello, world');
+  });
+
+  it('handles errors in adapter', async () => {
+    const adapter = async () => {
+      throw new Error('boom!');
+    };
+    server = await new DevelopmentServer()
+      .withPort(0)
+      .withAdapter(adapter)
+      .init();
+    await server.start();
+    const res = await fetch(`http://localhost:${server.port}/`);
+    assert.strictEqual(res.status, 500);
+    assert.strictEqual(await res.text(), 'boom!');
+  });
 });
