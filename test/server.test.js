@@ -263,16 +263,10 @@ describe('Server Test', () => {
   it('uses a given adapter', async () => {
     const adapter = async (event) => {
       // eslint-disable-next-line no-param-reassign
-      delete event.headers.host;
+      event.headers = {};
       assert.deepStrictEqual(event, {
         body: undefined,
-        headers: {
-        // "host": "localhost:51246",
-          'user-agent': 'adobe-fetch/4.1.1',
-          accept: '*/*',
-          'accept-encoding': 'gzip,deflate,br',
-          connection: 'close',
-        },
+        headers: {},
         pathParameters: {
           path: '',
         },
