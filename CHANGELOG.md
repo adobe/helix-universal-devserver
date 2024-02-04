@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/adobe/helix-universal-devserver/compare/v1.0.3...v1.1.0) (2024-02-04)
+
+
+### Features
+
+* add support for bundle testing ([#6](https://github.com/adobe/helix-universal-devserver/issues/6)) ([693678d](https://github.com/adobe/helix-universal-devserver/commit/693678de7cd072d3d154be39969d447a55256afd))
+
 ## [1.0.3](https://github.com/adobe/helix-universal-devserver/compare/v1.0.2...v1.0.3) (2024-02-03)
 
 
