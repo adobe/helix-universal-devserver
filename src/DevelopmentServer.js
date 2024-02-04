@@ -71,6 +71,7 @@ export class DevelopmentServer {
     this._cwd = process.cwd();
     this._port = process.env.WEBSERVER_PORT || 3000;
     this._headers = {};
+    this._adapter = null;
   }
 
   withPort(value) {
@@ -90,6 +91,16 @@ export class DevelopmentServer {
 
   withDirectory(value) {
     this._cwd = value;
+    return this;
+  }
+
+  /**
+   * sets the adapter to invoke. defaults to a lambda adapter created via {@link #createAdapter}.
+   * @param value
+   * @returns {DevelopmentServer}
+   */
+  withAdapter(value) {
+    this._adapter = value;
     return this;
   }
 
@@ -135,12 +146,14 @@ export class DevelopmentServer {
     const region = process.env.AWS_REGION ?? 'us-east-1';
     const accountId = process.env.AWS_ACCOUNT_ID ?? 'no-account';
 
-    const adapter = createAdapter({
-      factory: () => (req, ctx) => {
-        ctx.runtime.name = 'simulate';
-        return this._main(req, ctx);
-      },
-    });
+    if (!this._adapter) {
+      this._adapter = createAdapter({
+        factory: () => (req, ctx) => {
+          ctx.runtime.name = 'simulate';
+          return this._main(req, ctx);
+        },
+      });
+    }
     this._handler = async (req, res) => {
       const [rawPath, ...rest] = req.originalUrl.split('?');
       const rawQueryString = rest.join('?');
@@ -166,16 +179,23 @@ export class DevelopmentServer {
         getRemainingTimeInMillis: () => 60000,
       };
 
-      const {
-        statusCode,
-        headers,
-        isBase64Encoded,
-        body,
-      } = await adapter(event, context);
-
-      res.status(statusCode);
-      Object.entries(headers).forEach(([name, value]) => res.set(name, value));
-      res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
+      try {
+        const {
+          statusCode,
+          headers,
+          isBase64Encoded,
+          body,
+        } = await this._adapter(event, context);
+        res.status(statusCode);
+        Object.entries(headers)
+          .forEach(([name, value]) => res.set(name, value));
+        res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        res.status(500);
+        res.send(e.message);
+      }
     };
     this.params = config.params;
     return this;
