@@ -1,3 +1,10 @@
+## [1.1.31](https://github.com/adobe/helix-universal-devserver/compare/v1.1.30...v1.1.31) (2024-05-31)
+
+
+### Bug Fixes
+
+* handle cookies array in the response ([#49](https://github.com/adobe/helix-universal-devserver/issues/49)) ([9d99c04](https://github.com/adobe/helix-universal-devserver/commit/9d99c04322ab0b74794ac369fbd27e42310fa22f))
+
 ## [1.1.30](https://github.com/adobe/helix-universal-devserver/compare/v1.1.29...v1.1.30) (2024-05-25)
 
 
