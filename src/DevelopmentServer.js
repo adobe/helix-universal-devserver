@@ -182,6 +182,7 @@ export class DevelopmentServer {
       try {
         const {
           statusCode,
+          cookies,
           headers,
           isBase64Encoded,
           body,
@@ -189,6 +190,10 @@ export class DevelopmentServer {
         res.status(statusCode);
         Object.entries(headers)
           .forEach(([name, value]) => res.set(name, value));
+        cookies.forEach((cookie) => {
+          const [name, value] = cookie.split('=');
+          res.cookie(name, value);
+        });
         res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
       } catch (e) {
         // eslint-disable-next-line no-console
