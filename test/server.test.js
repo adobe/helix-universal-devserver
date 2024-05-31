@@ -283,6 +283,7 @@ describe('Server Test', () => {
         statusCode: 200,
         headers: {},
         body: 'hello, world',
+        cookies: ['a=1'],
       };
     };
     server = await new DevelopmentServer()
