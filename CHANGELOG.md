@@ -1,3 +1,10 @@
+## [1.1.35](https://github.com/adobe/helix-universal-devserver/compare/v1.1.34...v1.1.35) (2024-06-07)
+
+
+### Bug Fixes
+
+* empty commit to trigger release ([e93f70c](https://github.com/adobe/helix-universal-devserver/commit/e93f70c2d51539025b434af5aa4a5a009f922457))
+
 ## [1.1.34](https://github.com/adobe/helix-universal-devserver/compare/v1.1.33...v1.1.34) (2024-06-07)
 
 
