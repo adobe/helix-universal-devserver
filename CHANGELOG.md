@@ -1,3 +1,10 @@
+## [1.1.49](https://github.com/adobe/helix-universal-devserver/compare/v1.1.48...v1.1.49) (2024-08-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-deploy to v12.0.7 ([b7ddf21](https://github.com/adobe/helix-universal-devserver/commit/b7ddf21857fb23ae72ee9da5c520b48afa77b99a))
+
 ## [1.1.48](https://github.com/adobe/helix-universal-devserver/compare/v1.1.47...v1.1.48) (2024-08-01)
 
 
