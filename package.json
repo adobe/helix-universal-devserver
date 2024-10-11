@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "semantic-release": "semantic-release",
     "semantic-release-dry": "semantic-release --dry-run --branches $CI_BRANCH",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -49,7 +49,7 @@
   "dependencies": {
     "@adobe/helix-deploy": "^12.0.0",
     "@adobe/helix-universal": "5.0.6",
-    "express": "4.21.0",
+    "express": "4.21.1",
     "fs-extra": "11.2.0"
   }
 }
