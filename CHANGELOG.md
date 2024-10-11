@@ -1,3 +1,10 @@
+## [1.1.61](https://github.com/adobe/helix-universal-devserver/compare/v1.1.60...v1.1.61) (2024-10-11)
+
+
+### Bug Fixes
+
+* upgrade express ([8ddbffc](https://github.com/adobe/helix-universal-devserver/commit/8ddbffccc6e60c876974a75a8941ec4389edd406))
+
 ## [1.1.60](https://github.com/adobe/helix-universal-devserver/compare/v1.1.59...v1.1.60) (2024-10-10)
 
 
