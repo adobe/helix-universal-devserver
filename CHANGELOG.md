@@ -1,3 +1,10 @@
+## [1.1.72](https://github.com/adobe/helix-universal-devserver/compare/v1.1.71...v1.1.72) (2024-12-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency express to v4.21.2 ([#119](https://github.com/adobe/helix-universal-devserver/issues/119)) ([e3b7a5f](https://github.com/adobe/helix-universal-devserver/commit/e3b7a5f07f14374be0b9c1ce6d407cbd4e7a514d))
+
 ## [1.1.71](https://github.com/adobe/helix-universal-devserver/compare/v1.1.70...v1.1.71) (2024-12-06)
 
 
