@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-universal-devserver",
-  "version": "1.1.75",
+  "version": "1.1.76",
   "description": "Helic Universal Development Server",
   "main": "src/index.js",
   "type": "module",
