@@ -191,8 +191,9 @@ export class DevelopmentServer {
         Object.entries(headers)
           .forEach(([name, value]) => res.set(name, value));
         cookies.forEach((cookie) => {
-          const [name, value] = cookie.split('=');
-          res.cookie(name, value);
+          // calling res.cookie encodes the cookie _again_
+          // so we append them as response headers instead
+          res.append('set-cookie', cookie);
         });
         res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
       } catch (e) {
