@@ -1,3 +1,10 @@
+## [1.1.86](https://github.com/adobe/helix-universal-devserver/compare/v1.1.85...v1.1.86) (2025-02-06)
+
+
+### Bug Fixes
+
+* send cookies as response headers ([#139](https://github.com/adobe/helix-universal-devserver/issues/139)) ([1dca47b](https://github.com/adobe/helix-universal-devserver/commit/1dca47bd15117e0e73cfba8cac25d6a3dce65546))
+
 ## [1.1.85](https://github.com/adobe/helix-universal-devserver/compare/v1.1.84...v1.1.85) (2025-02-06)
 
 
