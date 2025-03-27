@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@adobe/helix-deploy": "^12.0.0",
-    "@adobe/helix-universal": "^5.0.9",
+    "@adobe/helix-universal": "^5.1.0",
     "express": "4.21.2",
     "fs-extra": "11.3.0"
   }
