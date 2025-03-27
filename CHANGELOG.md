@@ -1,3 +1,10 @@
+## [1.1.100](https://github.com/adobe/helix-universal-devserver/compare/v1.1.99...v1.1.100) (2025-03-27)
+
+
+### Bug Fixes
+
+* expect missing cookies ([#158](https://github.com/adobe/helix-universal-devserver/issues/158)) ([caf1f10](https://github.com/adobe/helix-universal-devserver/commit/caf1f107545417049d3f282f8a63be5bf02387c5))
+
 ## [1.1.99](https://github.com/adobe/helix-universal-devserver/compare/v1.1.98...v1.1.99) (2025-03-27)
 
 
