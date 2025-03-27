@@ -182,7 +182,7 @@ export class DevelopmentServer {
       try {
         const {
           statusCode,
-          cookies,
+          cookies = [],
           headers,
           isBase64Encoded,
           body,
