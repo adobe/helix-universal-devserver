@@ -220,15 +220,17 @@ export class DevelopmentServer {
     this.app = express();
 
     await new Promise((resolve, reject) => {
-      this.server = this.app.listen(this._port, () => {
+      this.server = this.app.listen(this._port, (err) => {
+        if (err) {
+          // eslint-disable-next-line no-console
+          console.error(err);
+          reject(err);
+          return;
+        }
         this._port = this.server.address().port;
         // eslint-disable-next-line no-console
         console.log(`Started development server at http://localhost:${this._port}/`);
         resolve();
-      }).on('error', (err) => {
-        // eslint-disable-next-line no-console
-        console.error(err);
-        reject(err);
       });
     });
 
@@ -236,7 +238,7 @@ export class DevelopmentServer {
     Object.entries(this._headers).forEach(([name, value]) => {
       this.app.use(addRequestHeader(name, value.replace('{port}', this._port)));
     });
-    this.app.all('*', this._handler);
+    this.app.all(/.*/, this._handler);
   }
 
   /**
