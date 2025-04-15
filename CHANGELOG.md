@@ -1,3 +1,10 @@
+## [1.1.108](https://github.com/adobe/helix-universal-devserver/compare/v1.1.107...v1.1.108) (2025-04-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-universal to v5.2.0 ([#168](https://github.com/adobe/helix-universal-devserver/issues/168)) ([8025244](https://github.com/adobe/helix-universal-devserver/commit/8025244fa29b9bc1556fdca0440884ef120863b8))
+
 ## [1.1.107](https://github.com/adobe/helix-universal-devserver/compare/v1.1.106...v1.1.107) (2025-04-14)
 
 
