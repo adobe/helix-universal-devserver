@@ -1,3 +1,10 @@
+## [1.1.128](https://github.com/adobe/helix-universal-devserver/compare/v1.1.127...v1.1.128) (2025-07-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-deploy to v13.1.1 ([#205](https://github.com/adobe/helix-universal-devserver/issues/205)) ([d85a2d0](https://github.com/adobe/helix-universal-devserver/commit/d85a2d047aa76acb104bae7196f60de462d37308))
+
 ## [1.1.127](https://github.com/adobe/helix-universal-devserver/compare/v1.1.126...v1.1.127) (2025-07-01)
 
 
