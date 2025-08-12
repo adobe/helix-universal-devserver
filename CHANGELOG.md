@@ -1,3 +1,10 @@
+## [1.1.135](https://github.com/adobe/helix-universal-devserver/compare/v1.1.134...v1.1.135) (2025-08-12)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#216](https://github.com/adobe/helix-universal-devserver/issues/216)) ([d8d0e1e](https://github.com/adobe/helix-universal-devserver/commit/d8d0e1e82bd0a422eeea73251f5fffb419daf1df))
+
 ## [1.1.134](https://github.com/adobe/helix-universal-devserver/compare/v1.1.133...v1.1.134) (2025-08-11)
 
 
