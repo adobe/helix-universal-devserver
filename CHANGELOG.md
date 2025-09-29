@@ -1,3 +1,10 @@
+## [1.1.141](https://github.com/adobe/helix-universal-devserver/compare/v1.1.140...v1.1.141) (2025-09-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fs-extra to v11.3.2 ([#227](https://github.com/adobe/helix-universal-devserver/issues/227)) ([4c914e3](https://github.com/adobe/helix-universal-devserver/commit/4c914e3962c9275d49fb0e5119c0c075710663b4))
+
 ## [1.1.140](https://github.com/adobe/helix-universal-devserver/compare/v1.1.139...v1.1.140) (2025-09-16)
 
 
