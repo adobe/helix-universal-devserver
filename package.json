@@ -51,6 +51,6 @@
     "@adobe/helix-deploy": "^13.0.0",
     "@adobe/helix-universal": "^5.1.0",
     "express": "5.1.0",
-    "fs-extra": "11.3.1"
+    "fs-extra": "11.3.2"
   }
 }
