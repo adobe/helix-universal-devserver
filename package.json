@@ -28,7 +28,7 @@
     "reporter-options": "configFile=.mocha-multi.json"
   },
   "devDependencies": {
-    "@adobe/eslint-config-helix": "3.0.11",
+    "@adobe/eslint-config-helix": "3.0.12",
     "@adobe/fetch": "4.2.3",
     "@eslint/config-helpers": "0.4.0",
     "@semantic-release/changelog": "6.0.3",
