@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adobe/helix-universal-devserver"
+    "url": "https://github.com/adobe/helix-universal-devserver.git"
   },
   "author": "",
   "license": "Apache-2.0",
