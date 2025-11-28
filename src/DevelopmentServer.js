@@ -204,7 +204,7 @@ export class DevelopmentServer {
         // Express's send() will override it otherwise
         const buf = isBase64Encoded ? Buffer.from(body, 'base64') : body;
         if (body.length > 0) {
-          res.send(body);
+          res.send(buf);
         }
         res.end();
       } catch (e) {
