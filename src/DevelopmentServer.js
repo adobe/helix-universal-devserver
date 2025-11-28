@@ -200,7 +200,13 @@ export class DevelopmentServer {
           // so we append them as response headers instead
           res.append('set-cookie', cookie);
         });
-        res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
+        // For HEAD requests, preserve the Content-Length header if set
+        // Express's send() will override it otherwise
+        if (method === 'HEAD' && headers['content-length']) {
+          res.end();
+        } else {
+          res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
+        }
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
