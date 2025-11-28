@@ -202,11 +202,11 @@ export class DevelopmentServer {
         });
         // For HEAD requests, preserve the Content-Length header if set
         // Express's send() will override it otherwise
-        if (method === 'HEAD' && headers['content-length']) {
-          res.end();
-        } else {
-          res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
+        const buf = isBase64Encoded ? Buffer.from(body, 'base64') : body;
+        if (body.length > 0) {
+          res.send(body);
         }
+        res.end();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
