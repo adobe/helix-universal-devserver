@@ -200,8 +200,7 @@ export class DevelopmentServer {
           // so we append them as response headers instead
           res.append('set-cookie', cookie);
         });
-        // For HEAD requests, preserve the Content-Length header if set
-        // Express's send() will override it otherwise
+        // only send body if not empty. this will also preserve the content-length header
         const buf = isBase64Encoded ? Buffer.from(body, 'base64') : body;
         if (body.length > 0) {
           res.send(buf);
