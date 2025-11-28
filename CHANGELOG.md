@@ -1,3 +1,10 @@
+## [1.1.142](https://github.com/adobe/helix-universal-devserver/compare/v1.1.141...v1.1.142) (2025-11-28)
+
+
+### Bug Fixes
+
+* support package.json -> hlx ([35a407c](https://github.com/adobe/helix-universal-devserver/commit/35a407c62a18ee07f177298e1019f2c922b0cac4))
+
 ## [1.1.141](https://github.com/adobe/helix-universal-devserver/compare/v1.1.140...v1.1.141) (2025-09-29)
 
 
