@@ -119,6 +119,18 @@ describe('Server Test', () => {
     assert.strictEqual(await res.text(), `hello: http://localhost:${server.port}`);
   });
 
+  it('it can set the content length header on HEAD requests', async () => {
+    const main = () => new Response('', { headers: { 'content-length': '9' } });
+    server = await new DevelopmentServer(main)
+      .withPort(0)
+      .withDirectory(resolve(__rootdir, 'test', 'fixtures', 'server-test2'))
+      .init();
+    await server.start();
+    const res = await fetch(`http://localhost:${server.port}/`, { method: 'HEAD' });
+    assert.strictEqual(res.headers.get('content-length'), '9');
+    assert.strictEqual(await res.text(), '');
+  });
+
   it('ignores missing dev files', async () => {
     const main = () => new Response('hello, world.');
     server = await new DevelopmentServer(main)
