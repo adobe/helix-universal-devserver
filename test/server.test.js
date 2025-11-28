@@ -308,4 +308,98 @@ describe('Server Test', () => {
     assert.strictEqual(res.status, 500);
     assert.strictEqual(await res.text(), 'boom!');
   });
+
+  it('supports hlx config (wsk is deprecated)', async () => {
+    const main = (_, ctx) => {
+      const body = {
+        ...ctx.runtime,
+      };
+      Object.entries(ctx.env).forEach(([key, value]) => {
+        if (key.startsWith('TEST_') && key.endsWith('_PARAM')) {
+          body[key] = value;
+        }
+      });
+
+      return new Response(JSON.stringify(body), {
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+    };
+    server = await new DevelopmentServer(main)
+      .withPort(0)
+      .withDirectory(resolve(__rootdir, 'test', 'fixtures', 'server-test-hlx'))
+      .init();
+    server.params.TEST_DIRECT_PARAM = 'foo-direct-param';
+    await server.start();
+
+    const res = await fetch(`http://localhost:${server.port}/`);
+    assert.deepStrictEqual(await res.json(), {
+      accountId: 'no-account',
+      name: 'simulate',
+      region: 'us-east-1',
+      TEST_DEFAULT_PARAM: 'dev-default',
+      TEST_DEV_FILE_PARAM: 'foo-dev-file',
+      TEST_DEV_PARAM: 'foo-dev-param',
+      TEST_DIRECT_PARAM: 'foo-direct-param',
+      TEST_FILE_PARAM: 'foo-file',
+      TEST_PACKAGE_FILE_PARAM: 'foo-package-file',
+      TEST_PACKAGE_PARAM: 'foo-package-param',
+      TEST_PARAM: 'foo-param',
+    });
+  });
+
+  it('prefers hlx config over wsk when both are present', async () => {
+    const main = (_, ctx) => {
+      const body = {
+        ...ctx.runtime,
+      };
+      Object.entries(ctx.env).forEach(([key, value]) => {
+        if (key.startsWith('TEST_') && key.endsWith('_PARAM')) {
+          body[key] = value;
+        }
+      });
+
+      return new Response(JSON.stringify(body), {
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+    };
+    server = await new DevelopmentServer(main)
+      .withPort(0)
+      .withDirectory(resolve(__rootdir, 'test', 'fixtures', 'server-test-mixed'))
+      .init();
+    await server.start();
+
+    const res = await fetch(`http://localhost:${server.port}/`);
+    const result = await res.json();
+    assert.strictEqual(result.TEST_PARAM, 'foo-param-hlx');
+    assert.strictEqual(result.TEST_DEFAULT_PARAM, 'dev-default-hlx');
+    assert.strictEqual(result.TEST_PACKAGE_PARAM, 'foo-package-param-hlx');
+    assert.strictEqual(result.TEST_DEV_PARAM, 'foo-dev-param-hlx');
+  });
+
+  it('handles package.json with no hlx or wsk config', async () => {
+    const main = () => new Response('hello, world.');
+    server = await new DevelopmentServer(main)
+      .withPort(0)
+      .withDirectory(resolve(__rootdir, 'test', 'fixtures', 'server-test-no-config'))
+      .init();
+    await server.start();
+    const res = await fetch(`http://localhost:${server.port}/`);
+    assert.strictEqual(await res.text(), 'hello, world.');
+  });
+
+  it('uses default AWS region us-east-1', async () => {
+    // to avoid any region being set in the environment
+    // which would override the default region
+    delete process.env.AWS_REGION;
+    const main = (_, ctx) => new Response(JSON.stringify(ctx.runtime));
+    server = await new DevelopmentServer(main).withPort(0).init();
+    await server.start();
+    const res = await fetch(`http://localhost:${server.port}/`);
+    const result = await res.json();
+    assert.strictEqual(result.region, 'us-east-1');
+  });
 });

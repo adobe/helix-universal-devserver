@@ -52,19 +52,50 @@ async function run() {
 ### Using development params with the server
 
 Sometimes it might be useful to specify action params that would be provided during deployment
-but are not available during development. those can be specified by a `dev-params-file` `wsk`
-property. those parameters are loaded an applied to every function call. eg:
+but are not available during development. Those can be specified using the `hlx` configuration
+in your `package.json`. The development server will load parameters from:
+
+1. `hlx.package.params-file` and `hlx.package.params`
+2. `hlx.params-file` and `hlx.params`
+3. `hlx.dev.params-file` and `hlx.dev.params` (overrides the above)
+
+Example using `hlx` (recommended):
 
 ```json5
 {
   // ...
-  "wsk": {
-    // ...
-    "dev-params-file": ".dev-secrets.env"
-  },
+  "hlx": {
+    "name": "my-action@${version}",
+    "params-file": [
+      "secrets.env"
+    ],
+    "params": {
+      "MY_PARAM": "value"
+    },
+    "package": {
+      "params-file": [
+        "package-secrets.env"
+      ],
+      "params": {
+        "PACKAGE_PARAM": "package-value"
+      }
+    },
+    "dev": {
+      "params-file": [
+        ".dev-secrets.env"
+      ],
+      "params": {
+        "DEV_PARAM": "dev-value"
+      }
+    }
+  }
   // ...
 }
 ```
+
+**Note:** The deprecated `wsk` configuration key is still supported for backwards compatibility,
+but `hlx` is now the recommended standard. If both are present, `hlx` takes precedence.
+See the [helix-deploy documentation](https://github.com/adobe/helix-deploy?tab=readme-ov-file#specifying-arguments-in-the-packagejson) for more details.
 
 ## Development
 

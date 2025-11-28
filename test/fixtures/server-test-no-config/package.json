@@ -1,0 +1,7 @@
+{
+  "name": "simple-project",
+  "version": "1.45.0",
+  "description": "Simple Test Project with no hlx or wsk config",
+  "private": true
+}
+
