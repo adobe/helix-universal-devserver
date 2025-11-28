@@ -110,15 +110,20 @@ export class DevelopmentServer {
 
   /**
    * Initializes the development server.
-   * It uses the `wsk.package.params-file` and `wsk.params-file` to read the environment for
-   * the action params.
+   * It uses the `hlx.package.params-file` and `hlx.params-file` to read the environment for
+   * the action params. Falls back to `wsk` for backwards compatibility (wsk is deprecated).
    *
    * @returns this
    */
   async init() {
     const pkgJson = await fse.readJson(path.resolve(this._cwd, 'package.json'));
     const config = new BaseConfig();
-    if (pkgJson.wsk) {
+
+    // Prefer 'hlx' over 'wsk' (wsk is deprecated but still supported)
+    const configKey = pkgJson.hlx ? 'hlx' : 'wsk';
+    const pkgConfig = pkgJson[configKey];
+
+    if (pkgConfig) {
       const withParamsFile = async (file) => {
         if (!file) {
           return;
@@ -132,12 +137,12 @@ export class DevelopmentServer {
         }));
       };
 
-      await withParamsFile(pkgJson.wsk?.package?.['params-file']);
-      config.withParams(pkgJson.wsk?.package?.params);
-      await withParamsFile(pkgJson.wsk?.['params-file']);
-      config.withParams(pkgJson.wsk?.params);
-      await withParamsFile(pkgJson.wsk?.dev?.['params-file']);
-      config.withParams(pkgJson.wsk?.dev?.params);
+      await withParamsFile(pkgConfig?.package?.['params-file']);
+      config.withParams(pkgConfig?.package?.params);
+      await withParamsFile(pkgConfig?.['params-file']);
+      config.withParams(pkgConfig?.params);
+      await withParamsFile(pkgConfig?.dev?.['params-file']);
+      config.withParams(pkgConfig?.dev?.params);
     }
 
     const builder = new ActionBuilder().withConfig(config);

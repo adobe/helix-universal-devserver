@@ -1,0 +1,56 @@
+{
+  "name": "simple-project",
+  "version": "1.45.0",
+  "description": "Simple Test Project with both hlx and wsk (hlx should take precedence)",
+  "private": true,
+  "hlx": {
+    "namespace": "helix",
+    "name": "simple-package/simple-name@${version}",
+    "params-file": [
+      "test.env"
+    ],
+    "params": {
+      "TEST_PARAM": "foo-param-hlx",
+      "TEST_DEFAULT_PARAM": "default-hlx"
+    },
+    "package": {
+      "name": "simple-package",
+      "params": {
+        "TEST_PACKAGE_PARAM": "foo-package-param-hlx"
+      },
+      "params-file": [
+        "test-package.env"
+      ]
+    },
+    "dev": {
+      "params": {
+        "TEST_DEV_PARAM": "foo-dev-param-hlx",
+        "TEST_DEFAULT_PARAM": "dev-default-hlx"
+      },
+      "params-file": [
+        "test-dev.env"
+      ]
+    }
+  },
+  "wsk": {
+    "namespace": "helix",
+    "name": "simple-package/simple-name@${version}",
+    "params": {
+      "TEST_PARAM": "foo-param-wsk-should-not-be-used",
+      "TEST_DEFAULT_PARAM": "default-wsk-should-not-be-used"
+    },
+    "package": {
+      "name": "simple-package",
+      "params": {
+        "TEST_PACKAGE_PARAM": "foo-package-param-wsk-should-not-be-used"
+      }
+    },
+    "dev": {
+      "params": {
+        "TEST_DEV_PARAM": "foo-dev-param-wsk-should-not-be-used",
+        "TEST_DEFAULT_PARAM": "dev-default-wsk-should-not-be-used"
+      }
+    }
+  }
+}
+
