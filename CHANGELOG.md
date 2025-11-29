@@ -1,3 +1,10 @@
+## [1.1.143](https://github.com/adobe/helix-universal-devserver/compare/v1.1.142...v1.1.143) (2025-11-29)
+
+
+### Bug Fixes
+
+* only send body if not empty ([d937b50](https://github.com/adobe/helix-universal-devserver/commit/d937b5006f35116fce8a374adb296b67c454f292))
+
 ## [1.1.142](https://github.com/adobe/helix-universal-devserver/compare/v1.1.141...v1.1.142) (2025-11-28)
 
 
