@@ -200,7 +200,12 @@ export class DevelopmentServer {
           // so we append them as response headers instead
           res.append('set-cookie', cookie);
         });
-        res.send(isBase64Encoded ? Buffer.from(body, 'base64') : body);
+        // only send body if not empty. this will also preserve the content-length header
+        const buf = isBase64Encoded ? Buffer.from(body, 'base64') : body;
+        if (body.length > 0) {
+          res.send(buf);
+        }
+        res.end();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
