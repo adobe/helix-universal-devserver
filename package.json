@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "3.0.24",
-    "@adobe/fetch": "4.2.3",
+    "@adobe/fetch": "4.3.0",
     "@eslint/config-helpers": "0.5.3",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
