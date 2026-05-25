@@ -30,7 +30,7 @@
   "devDependencies": {
     "@adobe/eslint-config-helix": "3.0.27",
     "@adobe/fetch": "4.3.0",
-    "@eslint/config-helpers": "0.5.5",
+    "@eslint/config-helpers": "0.6.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/npm": "13.1.5",
@@ -51,6 +51,6 @@
     "@adobe/helix-deploy": "^14.0.0",
     "@adobe/helix-universal": "^5.1.0",
     "express": "5.2.1",
-    "fs-extra": "11.3.4"
+    "fs-extra": "11.3.5"
   }
 }
