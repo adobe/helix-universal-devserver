@@ -1,3 +1,10 @@
+## [1.1.152](https://github.com/adobe/helix-universal-devserver/compare/v1.1.151...v1.1.152) (2026-10-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency express to v5.3.0 ([#366](https://github.com/adobe/helix-universal-devserver/issues/366)) ([6b8a0c4](https://github.com/adobe/helix-universal-devserver/commit/6b8a0c458c8a7d3f81c9e5edd2996cd13c429f6c))
+
 ## [1.1.151](https://github.com/adobe/helix-universal-devserver/compare/v1.1.150...v1.1.151) (2026-10-13)
 
 
