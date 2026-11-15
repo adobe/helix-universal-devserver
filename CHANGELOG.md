@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/adobe/helix-universal-devserver/compare/v1.1.152...v1.2.0) (2026-11-15)
+
+
+### Features
+
+* add optional development server host binding ([#369](https://github.com/adobe/helix-universal-devserver/issues/369)) ([314aebb](https://github.com/adobe/helix-universal-devserver/commit/314aebb2c615bd25e673dce4edd8aea8a3fd525e)), closes [adobe/helix-universal-devserver#368](https://github.com/adobe/helix-universal-devserver/issues/368)
+
 ## [1.1.152](https://github.com/adobe/helix-universal-devserver/compare/v1.1.151...v1.1.152) (2026-10-27)
 
 
