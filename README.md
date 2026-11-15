@@ -31,6 +31,28 @@ async function run() {
 run().then(process.stdout).catch(process.stderr);
 ```
 
+### Optional TCP host binding
+
+Use the chainable `withHost(host)` method to select an explicit TCP hostname or
+IP address. For example, bind only to IPv4 loopback on an ephemeral port:
+
+```js
+const devServer = await new DevelopmentServer(main)
+  .withPort(0)
+  .withHost('127.0.0.1')
+  .init();
+await devServer.start();
+```
+
+The assigned port is available as `devServer.port`. Omitting `withHost` preserves
+the existing port/callback listen behavior and defaults. An explicit host must
+be a non-empty, non-whitespace string; invalid values throw a `TypeError` before
+listening rather than falling back to an unspecified bind address. Normal
+startup errors and `stop()` behavior are unchanged.
+
+The advertised localhost URL and `x-forwarded-host` header do not select the
+TCP bind address.
+
 ### Test Helix Deploy Bundle
 
 sometimes it is useful to test a bundled universal function directly, for example to verify that

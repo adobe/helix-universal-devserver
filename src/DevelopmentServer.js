@@ -70,12 +70,26 @@ export class DevelopmentServer {
     this._main = main;
     this._cwd = process.cwd();
     this._port = process.env.WEBSERVER_PORT || 3000;
+    this._host = undefined;
     this._headers = {};
     this._adapter = null;
   }
 
   withPort(value) {
     this._port = value;
+    return this;
+  }
+
+  /**
+   * Selects an explicit TCP host without changing the default when omitted.
+   * @param {string} value - Non-empty hostname or IP address.
+   * @returns {DevelopmentServer}
+   */
+  withHost(value) {
+    if (typeof value !== 'string' || value.trim().length === 0) {
+      throw new TypeError('Host must be a non-empty string');
+    }
+    this._host = value;
     return this;
   }
 
@@ -230,7 +244,8 @@ export class DevelopmentServer {
     this.app = express();
 
     await new Promise((resolve, reject) => {
-      this.server = this.app.listen(this._port, (err) => {
+      const listenArgs = this._host === undefined ? [this._port] : [this._port, this._host];
+      this.server = this.app.listen(...listenArgs, (err) => {
         if (err) {
           // eslint-disable-next-line no-console
           console.error(err);

@@ -13,7 +13,9 @@
 /* eslint-env mocha */
 import assert from 'assert';
 import { resolve } from 'path';
+import { mock } from 'node:test';
 import { h1NoCache, Response } from '@adobe/fetch';
+import express from 'express';
 import { DevelopmentServer } from '../src/index.js';
 
 const { fetch } = h1NoCache();
@@ -30,6 +32,85 @@ describe('Server Test', () => {
     process.env = envCopy;
     await server?.stop();
     server = null;
+  });
+
+  describe('host binding', () => {
+    it('binds an ephemeral socket to the explicit host and preserves errors and stop', async () => {
+      const main = () => new Response('hello.');
+      server = await new DevelopmentServer(main)
+        .withPort(0)
+        .withHost('127.0.0.1')
+        .init();
+      await server.start();
+
+      const socket = server.server;
+      assert.deepStrictEqual(socket.address(), {
+        address: '127.0.0.1',
+        family: 'IPv4',
+        port: server.port,
+      });
+      assert.ok(server.port > 0);
+      const res = await fetch(`http://127.0.0.1:${server.port}/`);
+      assert.strictEqual(await res.text(), 'hello.');
+
+      const conflictingServer = await new DevelopmentServer(main)
+        .withPort(server.port)
+        .withHost('127.0.0.1')
+        .init();
+      await assert.rejects(conflictingServer.start(), { code: 'EADDRINUSE' });
+
+      await server.stop();
+      server = null;
+      assert.strictEqual(socket.listening, false);
+    });
+
+    it('preserves the legacy port/callback listen signature without opening a socket', async () => {
+      const close = mock.fn((callback) => callback());
+      const socket = {
+        address: () => ({ port: 12345 }),
+        close,
+      };
+      const listen = mock.method(express.application, 'listen', (...args) => {
+        queueMicrotask(args.at(-1));
+        return socket;
+      });
+      try {
+        server = await new DevelopmentServer(() => new Response('hello.'))
+          .withPort(0)
+          .init();
+        await server.start();
+        assert.strictEqual(listen.mock.callCount(), 1);
+        const { arguments: args } = listen.mock.calls[0];
+        assert.strictEqual(args.length, 2);
+        assert.strictEqual(args[0], 0);
+        assert.strictEqual(typeof args[1], 'function');
+        assert.strictEqual(server.port, 12345);
+
+        await server.stop();
+        server = null;
+        assert.strictEqual(close.mock.callCount(), 1);
+      } finally {
+        listen.mock.restore();
+      }
+    });
+
+    it('rejects invalid explicit hosts before listening', () => {
+      const listen = mock.method(express.application, 'listen', () => {
+        throw new Error('Unexpected listen for an invalid host');
+      });
+      try {
+        const candidate = new DevelopmentServer();
+        for (const host of [undefined, null, '', ' \t ', false, 0, {}, []]) {
+          assert.throws(() => candidate.withHost(host), {
+            name: 'TypeError',
+            message: 'Host must be a non-empty string',
+          });
+        }
+        assert.strictEqual(listen.mock.callCount(), 0);
+      } finally {
+        listen.mock.restore();
+      }
+    });
   });
 
   it('it can start an stop the server', async () => {
